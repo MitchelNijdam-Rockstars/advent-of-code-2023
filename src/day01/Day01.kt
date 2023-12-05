@@ -1,4 +1,13 @@
+package day01
+
+import printOutput
+import printTestOutput
+import readInput
+import readTestInput
+
 fun main() {
+    val day = 1
+
     fun part1(input: List<String>): Int {
         return input.sumOf { line ->
             val firstNumber = line.find { it.isDigit() }
@@ -32,20 +41,22 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
+    val testInput = readTestInput(day)
     val part1Test = part1(testInput)
     val part2Test = part2(testInput)
 
     printTestOutput(testInput, part1Test, part2Test)
 
-    val input = readInput("Day01")
+    val input = readInput(day)
     val part1 = part1(input)
     val part2 = part2(input)
 
     printOutput(part1, part2)
+
+
 }
 
-enum class Number(val number: String) {
+private enum class Number(val number: String) {
     one("1"),
     two("2"),
     three("3"),
@@ -57,33 +68,3 @@ enum class Number(val number: String) {
     nine("9");
 }
 
-private fun printOutput(part1: Int, part2: Int) {
-    println("\n\n")
-    println(
-        """
-        +++ Results +++
-        
-        Part 1
-        $part1
-        
-        Part 2
-        $part2
-    """.trimIndent()
-    )
-}
-
-private fun printTestOutput(testInput: List<String>, part1Test: Int, part2Test: Int) {
-    println(
-        """
-        --- Test Results ---
-        
-        Input: $testInput
-        
-        Part 1 (test)
-        $part1Test
-        
-        Part 2 (test)
-        $part2Test
-    """.trimIndent()
-    )
-}
