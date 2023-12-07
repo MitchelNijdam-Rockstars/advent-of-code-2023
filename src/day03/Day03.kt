@@ -60,10 +60,9 @@ fun main() {
         val end =
             if (partNumber.indexRange.last + 2 > relevantLine.length) relevantLine.length else partNumber.indexRange.last + 2
         val relevantCharacters = relevantLine.substring(start, end)
-        val gearIndex = relevantCharacters.indexOf('*')
-        val realGearIndex = relevantLine.indexOf('*', start)
+        val containsGear = relevantCharacters.contains('*')
 
-        return if (gearIndex != -1) Gear(row, realGearIndex) else null
+        return if (containsGear) Gear(row, relevantLine.indexOf('*', start)) else null
     }
 
     fun getAllGears(input: List<String>, partNumber: PartNumber): List<Gear> {
@@ -73,16 +72,13 @@ fun main() {
     }
 
     fun part2(input: List<String>): Int {
-        val gearToPartNumber = mutableMapOf<Gear, MutableList<PartNumber>>()
-
         val partNumbers = readPartNumbers(input)
 
-        partNumbers.forEach { partNumber ->
-            getAllGears(input, partNumber).forEach { gear ->
-                gearToPartNumber.putIfAbsent(gear, mutableListOf())
-                gearToPartNumber.getValue(gear).add(partNumber)
+        val gearToPartNumber = partNumbers.flatMap { partNumber ->
+            getAllGears(input, partNumber).map { gear ->
+                gear to partNumber
             }
-        }
+        }.groupBy({ it.first }, { it.second })
 
         return gearToPartNumber.filterValues { it.size == 2 }.mapValues { (_, partNumbers) ->
             partNumbers.map { it.number }.reduce { a, b -> a * b }
