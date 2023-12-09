@@ -83,7 +83,7 @@ fun main() {
     printOutput(part1, part2)
 }
 
-data class Game(
+private data class Game(
     val id: Int,
     val cubeReveals: List<CubeReveal>
 )
