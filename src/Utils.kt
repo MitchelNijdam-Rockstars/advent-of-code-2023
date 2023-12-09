@@ -24,6 +24,10 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
 fun Any?.println() = println(this)
 
 fun printTestOutput(testInput: List<String>, part1Test: Int, part2Test: Int) {
+    printTestOutput(testInput, part1Test.toLong(), part2Test.toLong())
+}
+
+fun printTestOutput(testInput: List<String>, part1Test: Long, part2Test: Long) {
     println("\n\n\n")
     println("------------------------------------------------------")
     println(
@@ -42,6 +46,10 @@ fun printTestOutput(testInput: List<String>, part1Test: Int, part2Test: Int) {
 }
 
 fun printOutput(part1: Int, part2: Int) {
+    printOutput(part1.toLong(), part2.toLong())
+}
+
+fun printOutput(part1: Long, part2: Long) {
     println("\n\n")
     println(
         """
@@ -57,3 +65,9 @@ fun printOutput(part1: Int, part2: Int) {
 }
 
 fun Regex.getFirstGroup(line: String): String = this.find(line)!!.groupValues[1]
+
+
+private val numberRegex = Regex("(\\d+)")
+fun findAllNumbers(input: String): List<Long> {
+    return numberRegex.findAll(input).map { it.value.toLong() }.toList()
+}

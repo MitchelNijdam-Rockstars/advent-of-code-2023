@@ -43,10 +43,7 @@ fun main() {
 
     fun part2(input: List<String>): Int {
         val cards = getCards(input)
-
-        val cardToAmountOfCopies = cards.associateWith {
-            1
-        }.toMutableMap()
+        val cardToAmountOfCopies = cards.associateWith { 1 }.toMutableMap()
 
         cards.forEach { card ->
             val copies = getCopies(card, cards)
