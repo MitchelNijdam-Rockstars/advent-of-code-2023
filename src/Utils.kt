@@ -28,11 +28,12 @@ fun printTestOutput(testInput: List<String>, part1Test: Int, part2Test: Int) {
 }
 
 fun printTestOutput(testInput: List<String>, part1Test: Long, part2Test: Long) {
-    println("\n\n\n")
-    println("------------------------------------------------------")
     println(
         """
-        --- Test Results ---
+
+
+
+        --- Test Results ---------------------------------------------------------
         
         Input: $testInput
         
@@ -41,6 +42,8 @@ fun printTestOutput(testInput: List<String>, part1Test: Long, part2Test: Long) {
         
         Part 2 (test)
         $part2Test
+        
+        --------------------------------------------------------------------------
     """.trimIndent()
     )
 }
