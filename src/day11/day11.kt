@@ -17,37 +17,6 @@ fun main() {
         }
     }
 
-    fun expandUniverse(universe: List<List<Char>>, expandAmount: Int = 1): List<List<Char>> {
-        val expandedUniverse = universe.map { row ->
-            row.toMutableList()
-        }.toMutableList()
-
-        var expandedRows = 0
-        var expandedColumns = 0
-        universe.forEachIndexed { index, row ->
-            if (row.all { it == '.' }) {
-                repeat(expandAmount) {
-                    val extraRow = universe.first().map { '.' }.toMutableList()
-                    expandedUniverse.add(index + 1 + expandedRows, extraRow)
-                    expandedRows++
-                }
-            }
-        }
-
-        universe.first().forEachIndexed { index, _ ->
-            if (universe.all { it[index] == '.' }) {
-                repeat(expandAmount) {
-                    val toUseIndex = index + 1 + expandedColumns
-
-                    expandedUniverse.forEach { it.add(toUseIndex, '.') }
-                    expandedColumns++
-                }
-            }
-        }
-
-        return expandedUniverse
-    }
-
     fun getCoordinates(
         galaxy: List<List<Char>>,
         expandedRows: List<Int>,
